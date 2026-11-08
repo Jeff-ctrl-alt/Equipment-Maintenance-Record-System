@@ -1,0 +1,2252 @@
+/* ==========================================
+EQUIPMENT MAINTENANCE RECORDS SYSTEM
+MAIN STYLESHEET
+========================================== */
+
+/* ==========================================
+
+1. GLOBAL SETTINGS
+   ========================================== */
+
+* {
+  box-sizing: border-box;
+  }
+
+:root {
+--navy: #173b55;
+--blue: #246b91;
+--bg: #f3f6f8;
+--text: #20313d;
+--muted: #6b7b86;
+--border: #dfe7ec;
+--white: #fff;
+--green: #217a55;
+--red: #b84747;
+--amber: #9a6a12;
+}
+
+body {
+margin: 0;
+background: var(--bg);
+color: var(--text);
+font-family: Arial, Helvetica, sans-serif;
+font-size: 14px;
+}
+
+button,
+input,
+select,
+textarea {
+font: inherit;
+}
+
+button {
+cursor: pointer;
+}
+
+/* ==========================================
+2. TOPBAR AND BRAND
+========================================== */
+
+.topbar {
+background: var(--navy);
+color: #fff;
+padding: 16px max(16px, calc((100% - 1200px) / 2));
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+}
+
+.brand {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.brand-icon {
+font-size: 28px;
+background: #ffffff1a;
+border-radius: 12px;
+padding: 9px;
+}
+
+.brand h1 {
+font-size: 18px;
+margin: 0;
+}
+
+.brand p {
+margin: 4px 0 0;
+color: #c9d9e3;
+font-size: 12px;
+}
+
+.offline-label {
+font-size: 12px;
+color: #c9f2d9;
+white-space: nowrap;
+}
+
+/* ==========================================
+3. MAIN APP LAYOUT
+========================================== */
+
+.app-shell {
+max-width: 1200px;
+margin: 22px auto;
+padding: 0 16px;
+display: grid;
+grid-template-columns: 210px minmax(0, 1fr);
+gap: 20px;
+}
+
+main {
+min-width: 0;
+}
+
+.view {
+display: none;
+}
+
+.view.active {
+display: block;
+}
+
+/* ==========================================
+4. NAVIGATION
+========================================== */
+
+.navigation {
+background: var(--white);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 10px;
+height: max-content;
+position: sticky;
+top: 12px;
+}
+
+.nav-btn {
+width: 100%;
+text-align: left;
+border: 0;
+background: transparent;
+padding: 13px 12px;
+border-radius: 9px;
+color: #52636e;
+margin: 2px 0;
+font-weight: 600;
+}
+
+.nav-btn.active,
+.nav-btn:hover {
+background: #eaf2f7;
+color: var(--navy);
+}
+
+/* ==========================================
+5. PAGE HEADINGS
+========================================== */
+
+.page-heading {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 14px;
+margin: 2px 0 18px;
+}
+
+.page-heading h2 {
+font-size: 25px;
+margin: 3px 0 5px;
+}
+
+.eyebrow {
+font-size: 10px;
+letter-spacing: 1.5px;
+font-weight: 700;
+color: var(--blue);
+margin: 0;
+}
+
+.muted {
+color: var(--muted);
+margin: 0;
+line-height: 1.5;
+}
+
+.date-chip {
+background: #e7eef3;
+padding: 8px 11px;
+border-radius: 20px;
+color: #405a6a;
+font-size: 12px;
+white-space: nowrap;
+}
+
+/* ==========================================
+6. DASHBOARD STATISTICS
+========================================== */
+
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 12px;
+margin-bottom: 16px;
+}
+
+.stat-card {
+background: var(--white);
+border: 1px solid var(--border);
+border-radius: 13px;
+padding: 17px;
+}
+
+.stat-card span {
+display: block;
+color: var(--muted);
+font-size: 12px;
+}
+
+.stat-card strong {
+display: block;
+font-size: 29px;
+margin: 9px 0 4px;
+color: var(--navy);
+}
+
+.stat-card small {
+color: #81909a;
+}
+
+/* ==========================================
+7. PANELS AND PANEL HEADINGS
+========================================== */
+
+.panel {
+background: var(--white);
+border: 1px solid var(--border);
+border-radius: 13px;
+padding: 17px;
+margin-bottom: 16px;
+}
+
+.panel-heading {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+margin-bottom: 14px;
+}
+
+.panel h3,
+.panel-heading h3 {
+font-size: 16px;
+margin: 0 0 5px;
+}
+
+/* ==========================================
+8. TOOLBARS
+========================================== */
+
+.toolbar {
+display: flex;
+gap: 9px;
+flex-wrap: wrap;
+margin-bottom: 14px;
+}
+
+.toolbar input {
+flex: 1;
+min-width: 190px;
+}
+
+.toolbar select {
+min-width: 140px;
+}
+
+/* ==========================================
+9. FORM ELEMENTS
+========================================== */
+
+input,
+select,
+textarea {
+width: 100%;
+padding: 11px 12px;
+border: 1px solid #ccd8df;
+border-radius: 8px;
+background: #fff;
+color: var(--text);
+min-height: 41px;
+}
+
+textarea {
+resize: vertical;
+}
+
+label {
+display: block;
+font-weight: 600;
+font-size: 12px;
+color: #425662;
+}
+
+label input,
+label select,
+label textarea {
+display: block;
+margin-top: 7px;
+font-weight: 400;
+font-size: 14px;
+}
+
+/* ==========================================
+10. BUTTONS
+========================================== */
+
+.primary-btn,
+.secondary-btn {
+border: 0;
+border-radius: 8px;
+padding: 11px 15px;
+font-weight: 700;
+min-height: 40px;
+}
+
+.primary-btn {
+background: var(--blue);
+color: white;
+}
+
+.primary-btn:hover {
+background: #1b5879;
+}
+
+.secondary-btn {
+background: #eaf0f4;
+color: #345364;
+}
+
+.icon-btn {
+border: 0;
+background: #eef2f4;
+border-radius: 8px;
+padding: 8px 11px;
+color: #52636e;
+}
+
+/* ==========================================
+11. FORM PANELS AND FORM LAYOUT
+========================================== */
+
+.form-panel {
+border-color: #b9cfdd;
+}
+
+.hidden {
+display: none !important;
+}
+
+.form-grid {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 13px;
+margin-bottom: 13px;
+}
+
+.form-panel > label {
+margin-bottom: 12px;
+}
+
+.form-actions {
+display: flex;
+gap: 9px;
+flex-wrap: wrap;
+margin-top: 14px;
+}
+
+/* ==========================================
+12. TABLES
+========================================== */
+
+.table-wrap {
+overflow-x: auto;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+min-width: 650px;
+}
+
+th,
+td {
+text-align: left;
+padding: 12px 10px;
+border-bottom: 1px solid #edf1f3;
+vertical-align: middle;
+}
+
+th {
+font-size: 12px;
+color: #71818b;
+text-transform: none;
+letter-spacing: 0.5px;
+}
+
+td {
+font-size: 13px;
+}
+
+td strong {
+display: block;
+margin-bottom: 4px;
+}
+
+td small {
+color: var(--muted);
+}
+
+/* ==========================================
+13. STATUS BADGES
+========================================== */
+
+.badge {
+display: inline-block;
+padding: 5px 8px;
+border-radius: 20px;
+font-size: 11px;
+font-weight: 700;
+background: #edf1f3;
+color: #53636d;
+}
+
+.badge.good,
+.badge.operational {
+background: #e4f4eb;
+color: #21734e;
+}
+
+.badge.fair,
+.badge.maintenance {
+background: #fff3d9;
+color: #8a6417;
+}
+
+.badge.poor,
+.badge.damaged,
+.badge.repair {
+background: #fde9e7;
+color: #a13d36;
+}
+
+/* ==========================================
+14. ACTION BUTTONS
+========================================== */
+
+.action-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.small-btn {
+border: 1px solid #d6e0e5;
+background: #fff;
+border-radius: 6px;
+padding: 6px 8px;
+font-size: 11px;
+color: #36576a;
+}
+
+.small-btn.danger {
+color: var(--red);
+}
+
+/* ==========================================
+15. RECORD LIST
+========================================== */
+
+.record-list {
+display: grid;
+gap: 10px;
+}
+
+.record-item {
+border: 1px solid #e5ecef;
+border-radius: 10px;
+padding: 13px;
+display: flex;
+justify-content: space-between;
+gap: 12px;
+}
+
+.record-item h4 {
+margin: 0 0 5px;
+font-size: 14px;
+}
+
+.record-item p {
+margin: 4px 0;
+color: var(--muted);
+font-size: 12px;
+line-height: 1.5;
+}
+
+.record-actions {
+display: flex;
+align-items: flex-start;
+gap: 6px;
+flex-wrap: wrap;
+}
+
+/* ==========================================
+16. EMPTY STATE AND NOTICES
+========================================== */
+
+.empty-state {
+text-align: center;
+color: var(--muted);
+padding: 25px 10px;
+}
+
+.note,
+.warning {
+padding: 14px 16px;
+border-radius: 10px;
+background: #eaf2f7;
+color: #3b586a;
+line-height: 1.6;
+}
+
+.warning {
+background: #fff4df;
+color: #775719;
+margin-top: 15px;
+}
+
+/* ==========================================
+17. BACKUP AND RESTORE
+========================================== */
+
+.backup-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 14px;
+}
+
+.backup-icon {
+font-size: 25px;
+color: var(--blue);
+margin-bottom: 10px;
+}
+
+.backup-grid .panel p {
+margin: 8px 0 16px;
+}
+
+.backup-grid input {
+margin-bottom: 10px;
+}
+
+/* ==========================================
+18. NOTIFICATION TOAST
+========================================== */
+
+.toast {
+position: fixed;
+top: 18px;
+right: 18px;
+left: auto;
+bottom: auto;
+transform: translateY(-20px);
+background: #203b4c;
+color: white;
+padding: 12px 18px;
+border-radius: 9px;
+opacity: 0;
+pointer-events: none;
+transition: 0.2s;
+max-width: 90%;
+z-index: 2000;
+}
+
+.toast.show {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* ==========================================
+19. TABLET RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 800px) {
+
+.app-shell {  
+    grid-template-columns: 1fr;  
+    margin: 12px auto;  
+}  
+
+.navigation {  
+    position: static;  
+    display: flex;  
+    overflow-x: auto;  
+    gap: 4px;  
+    padding: 7px;  
+}  
+
+.nav-btn {  
+    white-space: nowrap;  
+    width: auto;  
+    flex: 0 0 auto;  
+    padding: 10px;  
+}  
+
+.stats-grid {  
+    grid-template-columns: repeat(2, 1fr);  
+}
+
+}
+
+/* ==========================================
+20. MOBILE RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 520px) {
+
+.topbar {  
+    padding: 13px 14px;  
+}  
+
+.brand h1 {  
+    font-size: 15px;  
+}  
+
+.brand-icon {  
+    font-size: 23px;  
+}  
+
+.offline-label {  
+    font-size: 10px;  
+}  
+
+.app-shell {  
+    padding: 0 10px;  
+}  
+
+.page-heading {  
+    align-items: flex-start;  
+    flex-direction: column;  
+}  
+
+.page-heading h2 {  
+    font-size: 22px;  
+}  
+
+.page-heading > .primary-btn {  
+    width: 100%;  
+}  
+
+.form-grid {  
+    grid-template-columns: 1fr;  
+}  
+
+.backup-grid {  
+    grid-template-columns: 1fr;  
+}  
+
+.record-item {  
+    flex-direction: column;  
+}  
+
+.record-actions {  
+    justify-content: flex-start;  
+}  
+
+.stats-grid {  
+    gap: 8px;  
+}  
+
+.stat-card {  
+    padding: 13px;  
+}  
+
+.stat-card strong {  
+    font-size: 25px;  
+}  
+
+.panel {  
+    padding: 13px;  
+}  
+
+.toolbar {  
+    display: grid;  
+    grid-template-columns: 1fr;  
+}  
+
+.toolbar input,  
+.toolbar select {  
+    min-width: 0;  
+}
+
+}
+
+/* ==========================================
+21. DYNAMIC OTHER TEXT FIELDS
+========================================== */
+
+#eqCategoryOtherWrap,
+#eqConditionOtherWrap,
+#eqStatusOtherWrap,
+#maintenanceTypeOtherWrap,
+#conditionAfterOtherWrap,
+#statusAfterOtherWrap {
+width: 100%;
+}
+
+#eqCategoryOtherWrap input,
+#eqConditionOtherWrap input,
+#eqStatusOtherWrap input,
+#maintenanceTypeOtherWrap input,
+#conditionAfterOtherWrap input,
+#statusAfterOtherWrap input {
+margin-top: 7px;
+}
+
+/* ==========================================
+22. CONFIRMATION MODAL
+========================================== */
+
+.confirmation-overlay {
+position: fixed;
+inset: 0;
+background: rgba(15, 30, 40, 0.60);
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 16px;
+z-index: 1000;
+}
+
+.confirmation-box {
+background: #ffffff;
+width: 100%;
+max-width: 380px;
+padding: 25px;
+border-radius: 14px;
+text-align: center;
+box-shadow: 0 12px 40px rgba(0, 0, 0, 0.20);
+animation: confirmationAppear 0.18s ease;
+}
+
+.confirmation-icon {
+width: 48px;
+height: 48px;
+margin: 0 auto 14px;
+border-radius: 50%;
+background: #eaf2f7;
+color: var(--blue);
+font-size: 28px;
+font-weight: bold;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.confirmation-box h3 {
+margin: 0 0 10px;
+font-size: 18px;
+color: var(--navy);
+}
+
+.confirmation-box p {
+color: var(--muted);
+line-height: 1.6;
+margin: 0 0 22px;
+}
+
+.confirmation-actions {
+display: flex;
+justify-content: center;
+gap: 10px;
+}
+
+.confirmation-actions button {
+min-width: 105px;
+}
+
+.confirmation-actions .confirm-danger {
+background: var(--red);
+color: #ffffff;
+}
+
+.confirmation-actions .confirm-danger:hover {
+background: #963838;
+}
+
+@keyframes confirmationAppear {
+from {
+opacity: 0;
+transform: translateY(10px) scale(0.97);
+}
+
+to {  
+    opacity: 1;  
+    transform: translateY(0) scale(1);  
+}
+
+}
+
+@media (max-width: 520px) {
+
+.confirmation-box {  
+    padding: 21px;  
+}  
+
+.confirmation-actions {  
+    flex-direction: column-reverse;  
+}  
+
+.confirmation-actions button {  
+    width: 100%;  
+}
+
+}
+
+/* ==========================================
+23. EQUIPMENT HISTORY MODAL
+========================================== */
+
+.equipment-history-box {
+width: min(650px, 94vw);
+max-width: 650px;
+max-height: 85vh;
+overflow-y: auto;
+text-align: left;
+}
+
+.equipment-history-box .panel-heading {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+gap: 12px;
+}
+
+.history-section {
+margin-top: 18px;
+padding-top: 14px;
+border-top: 1px solid #e2e8f0;
+}
+
+.history-section h4 {
+margin: 0 0 12px;
+color: #173b55;
+}
+
+.history-details {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 12px;
+}
+
+.history-field {
+padding: 10px;
+background: #f5f8fa;
+border-radius: 8px;
+overflow-wrap: anywhere;
+}
+
+.history-field small {
+display: block;
+color: #64748b;
+margin-bottom: 5px;
+}
+
+.history-field strong {
+display: block;
+color: #173b55;
+font-size: 14px;
+}
+
+.history-activity {
+padding: 14px 0;
+border-bottom: 1px solid #e2e8f0;
+}
+
+.history-activity:last-child {
+border-bottom: none;
+}
+
+.history-activity h5 {
+margin: 0 0 8px;
+font-size: 15px;
+}
+
+.history-activity p {
+margin: 5px 0;
+overflow-wrap: anywhere;
+}
+
+.history-empty {
+padding: 18px 10px;
+color: #64748b;
+text-align: center;
+}
+
+@media (max-width: 480px) {
+.history-details {
+grid-template-columns: 1fr;
+}
+
+.equipment-history-box {
+padding: 18px;
+}
+}
+
+/* ==========================================
+24. ARCHIVED MAINTENANCE RECORDS
+========================================== */
+
+#view-archive hr {
+border: 0;
+border-top: 1px solid var(--border);
+margin: 25px 0;
+}
+
+#view-archive h3 {
+color: var(--navy);
+font-size: 16px;
+margin: 12px 0;
+}
+
+.archive-maintenance-badge {
+display: inline-block;
+padding: 4px 8px;
+border-radius: 20px;
+background: #eaf2f7;
+color: var(--blue);
+font-size: 10px;
+font-weight: 700;
+}
+
+.small-btn.archive-btn {
+background: #ffffff;
+border-color: #d6e0e5;
+color: #36576a;
+}
+
+.small-btn.archive-btn:hover {
+background: #f3f6f8;
+border-color: #c5d3dc;
+}
+
+
+/* ==========================================
+   EMRS FOOTER - COMPACT SPACING
+========================================== */
+
+.emrs-footer {
+    background: #173b55;
+    color: #ffffff;
+    margin-top: 30px;
+    padding: 18px 30px 12px;
+    border-radius: 12px 12px 0 0;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+}
+
+.footer-brand h3 {
+    font-size: 16px;
+    margin: 0 0 4px;
+    font-weight: 600;
+}
+
+.footer-brand p {
+    color: #c5d5df;
+    font-size: 12px;
+    margin: 0;
+}
+
+.footer-description {
+    color: #d5e1e8;
+    font-size: 13px;
+    text-align: center;
+    margin: 0;
+}
+
+.footer-bottom {
+    border-top: 1px solid #557184;
+    margin-top: 12px;
+    padding-top: 9px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #c5d5df;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 600px) {
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+
+    .footer-description {
+        text-align: center;
+    }
+
+    .emrs-footer {
+        padding: 16px 15px 12px;
+    }
+
+}
+
+
+/* Mobile Responsive */
+
+@media (max-width: 600px) {
+.footer-content {
+flex-direction: column;
+text-align: center;
+}
+
+.footer-description {  
+    text-align: center;  
+}  
+
+.emrs-footer {  
+    padding: 22px 15px 15px;  
+}
+
+}
+
+
+/* ==========================================
+   25. SCREEN PREVIEW MENU
+========================================== */
+
+.screen-preview-menu {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.screen-preview-btn {
+    width: 38px;
+    height: 38px;
+    border: 1px solid #ffffff35;
+    border-radius: 9px;
+    background: #ffffff15;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.screen-preview-btn:hover {
+    background: #ffffff2b;
+}
+
+.screen-preview-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 190px;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.16);
+    z-index: 1500;
+    animation: previewMenuAppear .15s ease;
+}
+
+.screen-preview-dropdown button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.screen-preview-dropdown button:hover {
+    background: #eaf2f7;
+    color: var(--navy);
+}
+
+@keyframes previewMenuAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   26. MOBILE SCREEN PREVIEW
+========================================== */
+
+body.preview-mobile .app-shell,
+body.preview-desktop .app-shell {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+
+body.preview-mobile .app-shell {
+    max-width: 390px;
+    min-width: 390px;
+    margin: 0 auto;
+    padding: 16px 10px;
+}
+
+body.preview-mobile .topbar {
+    min-width: 390px;
+}
+
+body.preview-mobile .emrs-footer {
+    min-width: 390px;
+}
+
+body.preview-mobile .app-shell {
+    grid-template-columns: 1fr;
+}
+
+body.preview-mobile .navigation {
+    position: static;
+    display: flex;
+    overflow-x: auto;
+    gap: 4px;
+}
+
+body.preview-mobile .nav-btn {
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+body.preview-mobile .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+body.preview-mobile .form-grid,
+body.preview-mobile .backup-grid {
+    grid-template-columns: 1fr;
+}
+
+body.preview-mobile .page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+body.preview-mobile .page-heading > .primary-btn {
+    width: 100%;
+}
+
+body.preview-mobile .toolbar {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+body.preview-mobile .toolbar input,
+body.preview-mobile .toolbar select {
+    min-width: 0;
+}
+
+body.preview-mobile .record-item {
+    flex-direction: column;
+}
+
+/* ==========================================
+   27. DESKTOP SCREEN PREVIEW
+========================================== */
+
+body.preview-desktop .app-shell {
+    max-width: 1200px;
+    min-width: 1000px;
+    margin: 22px auto;
+    padding: 0 16px;
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: 20px;
+}
+
+body.preview-desktop .topbar {
+    min-width: 1000px;
+}
+
+body.preview-desktop .emrs-footer {
+    min-width: 1000px;
+}
+
+body.preview-desktop .navigation {
+    display: block;
+    position: sticky;
+    top: 12px;
+}
+
+body.preview-desktop .nav-btn {
+    width: 100%;
+    white-space: normal;
+}
+
+body.preview-desktop .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+body.preview-desktop .form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.preview-desktop .backup-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+body.preview-desktop .page-heading {
+    flex-direction: row;
+    align-items: center;
+}
+
+body.preview-desktop .toolbar {
+    display: flex;
+}
+
+body.preview-desktop .record-item {
+    flex-direction: row;
+}
+
+/* ==========================================
+   28. PREVIEW DEVICE SCROLLING
+========================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body.preview-mobile,
+body.preview-desktop {
+    overflow-x: auto;
+}
+
+body.preview-mobile .topbar,
+body.preview-mobile .app-shell,
+body.preview-mobile .emrs-footer,
+body.preview-desktop .topbar,
+body.preview-desktop .app-shell,
+body.preview-desktop .emrs-footer {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 520px) {
+    body.preview-desktop .app-shell {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    body.preview-desktop .topbar,
+    body.preview-desktop .emrs-footer {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+
+/* ==========================================
+   29. SCREEN PREVIEW DIMENSION FIX
+========================================== */
+
+/* Mobile preview: simulated 390px screen */
+
+body.preview-mobile .topbar,
+body.preview-mobile .app-shell,
+body.preview-mobile .emrs-footer {
+    width: 390px;
+    min-width: 390px;
+    max-width: 390px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Desktop preview: simulated 1200px screen */
+
+body.preview-desktop .topbar,
+body.preview-desktop .app-shell,
+body.preview-desktop .emrs-footer {
+    width: 1200px;
+    min-width: 1200px;
+    max-width: 1200px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Keep preview content aligned */
+
+body.preview-mobile .app-shell {
+    grid-template-columns: 1fr;
+}
+
+body.preview-desktop .app-shell {
+    grid-template-columns: 210px minmax(0, 1fr);
+}
+
+/* Prevent preview layouts from shrinking */
+
+body.preview-mobile,
+body.preview-desktop {
+    overflow-x: auto;
+}
+
+body.preview-mobile .topbar,
+body.preview-desktop .topbar {
+    justify-content: space-between;
+}
+
+.datetime-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    flex-wrap: wrap;
+}
+
+.datetime-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.datetime-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    letter-spacing: 1px;
+}
+
+.datetime-item h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #173b55;
+}
+
+@media (max-width: 480px) {
+    .datetime-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ==========================================
+   MAINTENANCE RECORDS
+   ALIGNED HEADER + HORIZONTAL SCROLL
+========================================== */
+
+/* Main maintenance records container */
+
+#maintenanceList {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: visible;
+}
+
+/* Horizontal scrolling */
+
+.maintenance-scroll {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+}
+
+/* Shared table width */
+
+.maintenance-table {
+    --maintenance-columns: 190px 160px 190px 190px 150px;
+
+    width: 882px;
+    min-width: 882px;
+    max-width: none;
+    display: block;
+}
+
+/* Header and every record row */
+
+.maintenance-table-header,
+.maintenance-table-row {
+    display: grid;
+    grid-template-columns: var(--maintenance-columns);
+
+    width: 882px;
+    min-width: 882px;
+    max-width: none;
+
+    box-sizing: border-box;
+    align-items: stretch;
+    margin: 0;
+}
+
+/* Header */
+
+.maintenance-table-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    background: #ffffff;
+
+    border: 1px solid #dce5eb;
+    border-bottom: 2px solid #dce5eb;
+
+    border-radius: 8px 8px 0 0;
+}
+
+/* Header cells */
+
+.maintenance-header-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    min-width: 0;
+    padding: 14px 12px;
+    
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--navy);
+    
+    border-right: 1px solid #e5ecef;
+    
+    overflow-wrap: anywhere;
+}
+
+.maintenance-header-cell:last-child {
+    border-right: none;
+}
+
+/* Maintenance record rows */
+
+.maintenance-table-row {
+    background: #ffffff;
+
+    border-left: 1px solid #e5ecef;
+    border-right: 1px solid #e5ecef;
+    border-bottom: 1px solid #e5ecef;
+
+    border-top: none;
+    border-radius: 0;
+    overflow: hidden;
+
+    transition: background 0.2s ease;
+}
+
+/* Last record row */
+
+.maintenance-table-row:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+/* Record cells */
+
+.maintenance-cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 6px;
+
+    min-width: 0;
+    padding: 13px 12px;
+
+    border-right: 1px solid #e5ecef;
+
+    font-size: 12px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+.maintenance-cell:last-child {
+    border-right: none;
+}
+
+.maintenance-cell strong {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.maintenance-cell small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* Actions */
+
+.maintenance-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+.maintenance-actions .record-actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.maintenance-actions button {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 65px;
+    max-width: none;
+    white-space: nowrap;
+}
+
+/* Mobile horizontal scrolling */
+
+@media (max-width: 520px) {
+
+    #maintenanceList {
+        width: 100%;
+        overflow: visible;
+    }
+
+    .maintenance-scroll {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+}
+
+/* Mobile screen preview */
+
+body.preview-mobile #maintenanceList {
+    display: block;
+    width: 100%;
+    overflow: visible;
+}
+
+body.preview-mobile .maintenance-scroll {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Desktop screen preview */
+
+body.preview-desktop #maintenanceList {
+    display: block;
+    width: 100%;
+    overflow: visible;
+}
+
+body.preview-desktop .maintenance-scroll {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ==========================================
+   EQUIPMENT AND MAINTENANCE RECORDS
+   UNIFIED TABLE HEADER DESIGN
+========================================== */
+
+/* Shared Header Font Styling */
+
+#view-equipment .table-wrap table thead th,
+.maintenance-header-cell {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: none;
+    letter-spacing: 0.5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Equipment Records Header */
+
+#view-equipment .table-wrap table thead th {
+    padding: 14px 10px;
+}
+
+/* Maintenance Records Header */
+
+.maintenance-header-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 12px;
+}
+
+/* ==========================================
+   EQUIPMENT AND MAINTENANCE RECORDS
+   VISIBLE HORIZONTAL AND VERTICAL LINES
+========================================== */
+
+/* EQUIPMENT RECORDS TABLE */
+
+#view-equipment table {
+    border-collapse: collapse;
+    border: 1px solid #cbd5dc;
+}
+
+#view-equipment table th,
+#view-equipment table td {
+    border: 1px solid #cbd5dc;
+}
+
+/* MAINTENANCE RECORDS TABLE */
+
+.maintenance-table-header {
+    border: 1px solid #cbd5dc;
+}
+
+.maintenance-header-cell {
+    border-right: 1px solid #cbd5dc;
+    border-bottom: 1px solid #cbd5dc;
+}
+
+.maintenance-table-row {
+    border-bottom: 1px solid #cbd5dc;
+}
+
+.maintenance-cell {
+    border-right: 1px solid #cbd5dc;
+}
+
+/* REMOVE RIGHT BORDER ON LAST COLUMN */
+
+#view-equipment table th:last-child,
+#view-equipment table td:last-child,
+.maintenance-header-cell:last-child,
+.maintenance-cell:last-child {
+    border-right: none;
+}
+
+/* ==========================================
+   EQUIPMENT RECORDS
+   CENTER ACTION BUTTONS
+========================================== */
+
+#view-equipment table th:last-child,
+#view-equipment table td:last-child {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+#view-equipment table td:last-child .action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+/* ==========================================
+   EQUIPMENT RECORDS
+   CENTER ACTION BUTTONS
+========================================== */
+
+#view-equipment table th:last-child,
+#view-equipment table td:last-child {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#view-equipment table td:last-child .action-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+}
+
+/* ==========================================
+   FIX MAINTENANCE RECORDS COLUMN PLACEMENT
+========================================== */
+
+.maintenance-table-row {
+    display: grid !important;
+    grid-template-columns: var(--maintenance-columns) !important;
+}
+
+/* Equipment column */
+.maintenance-table-row > .maintenance-cell:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+/* Activity column */
+.maintenance-table-row > .maintenance-cell:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+/* Condition column */
+.maintenance-table-row > .maintenance-cell:nth-child(3) {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+/* Status column */
+.maintenance-table-row > .maintenance-cell:nth-child(4) {
+    grid-column: 4;
+    grid-row: 1;
+}
+
+/* Actions column */
+.maintenance-table-row > .maintenance-actions {
+    grid-column: 5 !important;
+    grid-row: 1 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* ==========================================
+   EQUIPMENT RECORDS
+   BALANCED ACTIONS COLUMN
+========================================== */
+
+#equipmentTable {
+    table-layout: auto;
+}
+
+#equipmentTable th:last-child,
+#equipmentTable td:last-child {
+    width: 190px;
+    min-width: 190px;
+    max-width: 190px;
+    white-space: nowrap;
+    text-align: center;
+    padding: 10px 8px;
+}
+
+#equipmentTable td:last-child .action-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+#equipmentTable td:last-child .small-btn {
+    flex: 0 0 auto;
+    padding: 6px 7px;
+    font-size: 11px;
+    white-space: nowrap;
+    margin: 0;
+}
+
+/* ==========================================
+   END BALANCED ACTIONS COLUMN
+========================================== */
+
+
+/* ==========================================
+   SYSTEM ACTIVITY LOG PAGINATION
+========================================== */
+
+.activity-pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    padding: 18px 10px;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* ACTIVITY COUNT */
+
+.activity-page-info {
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* PAGINATION CONTROLS */
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* ALL PAGINATION BUTTONS */
+
+.pagination-btn {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 9px;
+    border: 1px solid #dbe2e8;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #173b55;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+/* HOVER */
+
+.pagination-btn:not(:disabled):hover {
+    background: #eaf1f6;
+    border-color: #173b55;
+}
+
+/* ACTIVE PAGE */
+
+.pagination-number.active {
+    background: #173b55;
+    color: #ffffff;
+    border-color: #173b55;
+}
+
+/* ARROW BUTTONS */
+
+.pagination-arrow {
+    font-size: 17px;
+    font-weight: 600;
+    padding: 0;
+}
+
+/* PREVIOUS AND NEXT TEXT BUTTONS */
+
+.pagination-text-btn {
+    padding: 0 12px;
+    font-size: 12px;
+}
+
+/* DISABLED BUTTONS */
+
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: #f1f5f9;
+    color: #94a3b8;
+    border-color: #e2e8f0;
+}
+
+/* HIDE PAGINATION */
+
+.activity-pagination.hidden {
+    display: none;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 480px) {
+
+    .activity-pagination {
+        padding: 15px 4px;
+        gap: 10px;
+    }
+
+    .pagination-controls {
+        gap: 3px;
+    }
+
+    .pagination-btn {
+        min-width: 30px;
+        height: 32px;
+        padding: 0 6px;
+        font-size: 12px;
+    }
+
+    .pagination-arrow {
+        font-size: 16px;
+    }
+
+    .pagination-text-btn {
+        padding: 0 7px;
+        font-size: 11px;
+    }
+
+    .activity-page-info {
+        font-size: 12px;
+    }
+
+}
+
+/* ==========================================
+   30. FACEBOOK-STYLE ACTIVITY LOG FILTER
+========================================== */
+
+/* SEARCH AND FILTER TOOLBAR */
+
+.activity-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.activity-toolbar .search-input {
+    flex: 1;
+    min-width: 0;
+}
+
+/* FILTER WRAPPER */
+
+.activity-filter-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* FILTER BUTTON */
+
+.activity-filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 41px;
+    padding: 9px 15px;
+    border: 1px solid #ccd8df;
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.activity-filter-btn:hover,
+.activity-filter-btn[aria-expanded="true"] {
+    background: #eaf2f7;
+    border-color: var(--blue);
+}
+
+/* ACTIVE FILTER BADGE */
+
+.activity-filter-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 19px;
+    height: 19px;
+    padding: 0 5px;
+    border-radius: 50px;
+    background: var(--blue);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* FILTER POPUP PANEL */
+
+.activity-filter-panel {
+    position: absolute;
+    top: calc(100% + 9px);
+    right: 0;
+    width: 340px;
+    max-width: calc(100vw - 40px);
+    max-height: 75vh;
+    overflow-y: auto;
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+    z-index: 1500;
+    animation: activityFilterAppear 0.18s ease;
+}
+
+/* FILTER PANEL ANIMATION */
+
+@keyframes activityFilterAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* FILTER HEADER */
+
+.activity-filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.activity-filter-header h3 {
+    margin: 0 0 5px;
+    color: var(--navy);
+    font-size: 16px;
+}
+
+.activity-filter-header p {
+    font-size: 12px;
+}
+
+/* FILTER GROUPS */
+
+.activity-filter-group {
+    margin-bottom: 15px;
+}
+
+.activity-filter-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #425662;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.activity-filter-group select,
+.activity-filter-group input {
+    width: 100%;
+    min-height: 40px;
+    padding: 9px 11px;
+    border: 1px solid #d6e0e5;
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--text);
+    font-size: 13px;
+}
+
+.activity-filter-group select:focus,
+.activity-filter-group input:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 2px rgba(36, 107, 145, 0.10);
+}
+
+/* CUSTOM DATE RANGE */
+
+.activity-custom-date {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* FILTER ACTION BUTTONS */
+
+.activity-filter-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+    padding-top: 14px;
+    margin-top: 5px;
+    border-top: 1px solid #e5ecef;
+}
+
+.activity-filter-actions button {
+    flex: 1;
+    min-height: 39px;
+    padding: 9px 10px;
+    font-size: 12px;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 520px) {
+
+    .activity-toolbar {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 7px;
+    }
+
+    .activity-toolbar .search-input {
+        flex: 1;
+        min-width: 0;
+        width: 100%;
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .activity-filter-btn {
+        padding: 9px 11px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .activity-filter-panel {
+        width: 320px;
+        max-width: calc(100vw - 36px);
+        padding: 15px;
+    }
+
+    .activity-custom-date {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+}
+
+/* ==========================================
+   END ACTIVITY LOG FILTER
+========================================== */
+
+/* ==========================================
+   EQUIPMENT CONDITION BADGE COLORS
+   ========================================== */
+
+.badge.condition-badge.condition-excellent {
+    background: #dceeff;
+    color: #1d5f91;
+    border: 1px solid #b8d9f5;
+}
+
+.badge.condition-badge.condition-good {
+    background: #dff3e7;
+    color: #217a55;
+    border: 1px solid #b9e2c8;
+}
+
+.badge.condition-badge.condition-fair {
+    background: #fff3cd;
+    color: #8a6d1d;
+    border: 1px solid #f1df9b;
+}
+
+.badge.condition-badge.condition-poor {
+    background: #ffe4cc;
+    color: #a65312;
+    border: 1px solid #f5c69f;
+}
+
+.badge.condition-badge.condition-damaged {
+    background: #f8d7da;
+    color: #a12b36;
+    border: 1px solid #efb7bd;
+}
+
+.badge.condition-badge.condition-other {
+    background: #e9ecef;
+    color: #59636e;
+    border: 1px solid #d5dbe0;
+}
+
+
+/* ==========================================
+   EQUIPMENT STATUS BADGE COLORS
+   ========================================== */
+
+.badge.status-badge.status-operational {
+    background: #dff3e7;
+    color: #217a55;
+    border: 1px solid #b9e2c8;
+}
+
+.badge.status-badge.status-maintenance {
+    background: #fff3cd;
+    color: #8a6d1d;
+    border: 1px solid #f1df9b;
+}
+
+.badge.status-badge.status-repair {
+    background: #ffe4cc;
+    color: #a65312;
+    border: 1px solid #f5c69f;
+}
+
+.badge.status-badge.status-discontinued {
+    background: #f8d7da;
+    color: #a12b36;
+    border: 1px solid #efb7bd;
+}
+
+.badge.status-badge.status-other {
+    background: #e9ecef;
+    color: #59636e;
+    border: 1px solid #d5dbe0;
+}
+
+/* ==========================================
+   FIX: MAINTENANCE CONDITION AND STATUS BADGES
+   COLOR ONLY AROUND THE TEXT
+========================================== */
+
+.maintenance-cell .badge,
+.history-field .badge,
+.history-activity .badge,
+.record-item .badge {
+    display: inline-block !important;
+    width: fit-content !important;
+    max-width: max-content;
+    flex: 0 0 auto;
+    align-self: flex-start;
+    padding: 4px 9px;
+    border-radius: 20px;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+/* ==========================================
+END OF STYLESHEET
+========================================== */

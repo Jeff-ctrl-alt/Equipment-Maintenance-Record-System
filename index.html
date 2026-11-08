@@ -1,0 +1,934 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <meta name="theme-color" content="#173b55">  
+  <title>Equipment Maintenance Records System</title>  
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent">
+</head>  
+
+<body>  
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-icon">⚙️</div>
+    <div>
+      <h1>Equipment Maintenance</h1>
+      <p>Records Management System</p>
+    </div>
+  </div>
+
+  <div class="screen-preview-menu">
+    <button
+      type="button"
+      id="screenPreviewBtn"
+      class="screen-preview-btn"
+      aria-label="Screen preview options"
+      aria-expanded="false"
+      aria-haspopup="true">
+      ⋮
+    </button>
+
+    <div id="screenPreviewDropdown"
+         class="screen-preview-dropdown hidden">
+
+      <button type="button" id="mobilePreviewBtn">
+        <span>📱</span>
+        Mobile View
+      </button>
+
+      <button type="button" id="desktopPreviewBtn">
+        <span>🖥️</span>
+        Desktop View
+      </button>
+
+    </div>
+  </div>
+</header>
+
+    
+  <div class="app-shell">  
+    <nav class="navigation" aria-label="Main navigation">  
+      <button class="nav-btn active" data-view="dashboard">▦ Dashboard</button>  
+      <button class="nav-btn" data-view="equipment">▣ Equipment</button>  
+      <button class="nav-btn" data-view="maintenance">🔧 Maintenance</button>  
+      <button class="nav-btn" data-view="archive">▤ Archive</button>  
+      <button class="nav-btn" data-view="activity">☷ System Activity Log</button>  
+    </nav>  <main>  
+  <section id="view-dashboard" class="view active">  
+    <div class="page-heading">  
+      <div>  
+        <p class="eyebrow">OVERVIEW</p>  
+        <h2>Dashboard</h2>  
+        <p class="muted">Equipment condition and maintenance summary.</p>  
+      </div>  
+      <span id="todayLabel" class="date-chip"></span>  
+    </div>  
+
+    <div class="stats-grid">  
+      <article class="stat-card"><span>Total active equipment</span><strong id="statTotal">0</strong><small>Registered equipment</small></article>  
+      <article class="stat-card"><span>Operational</span><strong id="statOperational">0</strong><small>Ready for use</small></article>  
+      <article class="stat-card"><span>Under maintenance</span><strong id="statMaintenance">0</strong><small>Currently being checked</small></article>  
+      <article class="stat-card"><span>For repair / damaged</span><strong id="statRepair">0</strong><small>Needs attention</small></article>  
+    </div>  
+
+    <div class="panel">  
+      <div class="panel-heading">  
+        <div>  
+          <h3>Recent maintenance activities</h3>  
+          <p class="muted">Latest activities appear first.</p>  
+        </div>  
+        <button class="secondary-btn" data-go="maintenance">View all</button>  
+      </div>  
+      <div id="dashboardRecent" class="record-list"></div>  
+    </div>  
+  </section>  
+
+  <section id="view-equipment" class="view">  
+    <div class="page-heading">  
+      <div>  
+        <p class="eyebrow">ASSET REGISTER</p>  
+        <h2>Equipment Records</h2>  
+        <p class="muted">Register, update, search, and filter equipment.</p>  
+      </div>  
+      <button id="showEquipmentForm" class="primary-btn">＋ Add equipment</button>  
+    </div>  
+
+    <form id="equipmentForm" class="panel form-panel hidden">  
+      <div class="panel-heading">  
+        <div>  
+          <h3 id="equipmentFormTitle">Register equipment</h3>  
+          <p class="muted">Fields marked * are required.</p>  
+        </div>  
+        <button type="button" id="cancelEquipmentForm" class="icon-btn" aria-label="Close">✕</button>  
+      </div>  
+
+      <input type="hidden" id="equipmentId">  
+
+      <div class="form-grid">  
+        <label>Equipment ID *  
+          <input id="eqId" required maxlength="30" placeholder="e.g. EQ-001">  
+        </label>  
+
+        <label>Equipment name *  
+          <input id="eqName" required maxlength="80" placeholder="e.g. Desktop Computer">  
+        </label>  
+
+        <label>Category *  
+          <select id="eqCategory" required>  
+            <option value="">Select category</option>  
+            <option>Computer</option>  
+            <option>Network Equipment</option>  
+            <option>Printer</option>  
+            <option>Audio-Visual</option>  
+            <option>Office Equipment</option>  
+            <option>Furniture</option>  
+            <option>Other</option>  
+          </select>  
+        </label>  
+
+        <label id="eqCategoryOtherWrap" class="hidden">  
+          Specify other category *  
+          <input id="eqCategoryOther" maxlength="60" placeholder="Enter equipment category">  
+        </label>  
+
+        <label>Brand  
+          <input id="eqBrand" maxlength="60" placeholder="e.g. Dell">  
+        </label>  
+
+        <label>Model  
+          <input id="eqModel" maxlength="60" placeholder="Model">  
+        </label>  
+
+        <label>Serial number  
+          <input id="eqSerial" maxlength="80" placeholder="Serial number">  
+        </label>  
+
+        <label>Location *  
+          <input id="eqLocation" required maxlength="80" placeholder="e.g. Computer Lab 1">  
+        </label>  
+
+        <label>Date acquired  
+          <input id="eqDate" type="date">  
+        </label>  
+
+        <label>Condition *  
+          <select id="eqCondition" required>  
+            <option>Excellent</option>  
+            <option selected>Good</option>  
+            <option>Fair</option>  
+            <option>Poor</option>  
+            <option>Damaged</option>  
+            <option>Other</option>  
+          </select>  
+        </label>  
+
+        <label id="eqConditionOtherWrap" class="hidden">  
+          Specify other condition *  
+          <input id="eqConditionOther" maxlength="60" placeholder="Enter equipment condition">  
+        </label>  
+
+        <label>Status *  
+          <select id="eqStatus" required>  
+            <option>Operational</option>  
+            <option>Under Maintenance</option>  
+            <option>For Repair</option>  
+            <option>Discontinued</option>  
+            <option>Other</option>  
+          </select>  
+        </label>  
+
+        <label id="eqStatusOtherWrap" class="hidden">  
+          Specify other status *  
+          <input id="eqStatusOther" maxlength="60" placeholder="Enter equipment status">  
+        </label>  
+      </div>  
+
+      <label>Notes  
+        <textarea id="eqNotes" rows="2" maxlength="500" placeholder="Additional information (optional)"></textarea>  
+      </label>  
+
+      <div class="form-actions">  
+        <button type="submit" class="primary-btn">Save equipment</button>  
+        <button type="button" id="clearEquipmentForm" class="secondary-btn">Clear form</button>  
+      </div>  
+    </form>  
+
+    <div class="panel">  
+      <div class="toolbar">  
+        <input id="equipmentSearch" class="search-input" type="search" placeholder="Search ID, name, brand, serial, location...">  
+
+        <select id="filterCategory">  
+          <option value="">All categories</option>  
+          <option>Computer</option>  
+          <option>Network Equipment</option>  
+          <option>Printer</option>  
+          <option>Audio-Visual</option>  
+          <option>Office Equipment</option>  
+          <option>Furniture</option>  
+          <option>Other</option>  
+        </select>  
+
+        <select id="filterCondition">  
+          <option value="">All conditions</option>  
+          <option>Excellent</option>  
+          <option>Good</option>  
+          <option>Fair</option>  
+          <option>Poor</option>  
+          <option>Damaged</option>  
+          <option>Other</option>  
+        </select>  
+
+        <select id="filterStatus">  
+          <option value="">All statuses</option>  
+          <option>Operational</option>  
+          <option>Under Maintenance</option>  
+          <option>For Repair</option>  
+          <option>Discontinued</option>  
+          <option>Other</option>  
+        </select>  
+      </div>  
+
+      <div class="table-wrap">
+  <table id="equipmentTableElement">  
+          <thead>  
+            <tr><th>Equipment</th><th>Category / Location</th><th>Condition</th><th>Status</th><th>Actions</th></tr>  
+          </thead>  
+          <tbody id="equipmentTable"></tbody>  
+        </table>  
+      </div>  
+      <p id="equipmentEmpty" class="empty-state hidden">No equipment records found.</p>  
+    </div>  
+    
+    <!-- EQUIPMENT PAGINATION -->
+<div id="equipmentPagination" class="activity-pagination hidden">
+
+    <div id="equipmentPageInfo" class="activity-page-info"></div>
+
+    <div class="pagination-controls">
+
+        <button
+            type="button"
+            id="equipmentPrevGroup"
+            class="pagination-btn pagination-text-btn">
+            Previous
+        </button>
+
+        <button
+            type="button"
+            id="equipmentPrevPage"
+            class="pagination-btn pagination-arrow"
+            aria-label="Previous page">
+            &lt;
+        </button>
+
+        <div
+            id="equipmentPageNumbers"
+            class="pagination-numbers">
+        </div>
+
+        <button
+            type="button"
+            id="equipmentNextPage"
+            class="pagination-btn pagination-arrow"
+            aria-label="Next page">
+            &gt;
+        </button>
+
+        <button
+            type="button"
+            id="equipmentNextGroup"
+            class="pagination-btn pagination-text-btn">
+            Next
+        </button>
+
+    </div>
+
+</div>
+  </section>  
+
+  <section id="view-maintenance" class="view">  
+    <div class="page-heading">  
+      <div>  
+        <p class="eyebrow">SERVICE LOG</p>  
+        <h2>Maintenance Records</h2>  
+        <p class="muted">Record inspections, cleaning, troubleshooting, and repairs.</p>  
+      </div>  
+      <button id="showMaintenanceForm" class="primary-btn">＋ Add activity</button>  
+    </div>  
+
+    <form id="maintenanceForm" class="panel form-panel hidden">  
+      <div class="panel-heading">  
+        <div>  
+          <h3>Record maintenance activity</h3>  
+          <p class="muted">Choose the equipment being serviced.</p>  
+        </div>  
+        <button type="button" id="cancelMaintenanceForm" class="icon-btn">✕</button>  
+      </div>  
+
+      <div class="form-grid">  
+        <label>Equipment *  
+          <select id="maintenanceEquipment" required>  
+            <option value="">Select equipment</option>  
+          </select>  
+        </label>  
+
+        <label>Date *  
+          <input id="maintenanceDate" type="date" required>  
+        </label>  
+
+        <label>Activity type *  
+          <select id="maintenanceType" required>  
+            <option value="">Select activity</option>  
+            <option>Inspection</option>  
+            <option>Cleaning</option>  
+            <option>Preventive Maintenance</option>  
+            <option>Troubleshooting</option>  
+            <option>Repair</option>  
+            <option>Parts Replacement</option>  
+            <option>Other</option>  
+          </select>  
+        </label>  
+
+        <label id="maintenanceTypeOtherWrap" class="hidden">  
+          Specify other activity *  
+          <input id="maintenanceTypeOther" maxlength="80" placeholder="Enter maintenance activity">  
+        </label>  
+
+        <label>Performed by  
+          <input id="performedBy" maxlength="80" placeholder="Staff name (optional)">  
+        </label>  
+
+        <label>Condition after activity *  
+          <select id="conditionAfter" required>  
+            <option>Excellent</option>  
+            <option selected>Good</option>  
+            <option>Fair</option>  
+            <option>Poor</option>  
+            <option>Damaged</option>  
+            <option>Other</option>  
+          </select>  
+        </label>  
+
+        <label id="conditionAfterOtherWrap" class="hidden">  
+          Specify other condition *  
+          <input id="conditionAfterOther" maxlength="60" placeholder="Enter condition after activity">  
+        </label>  
+
+        <label>Status after activity *  
+          <select id="statusAfter" required>  
+            <option>Operational</option>  
+            <option>Under Maintenance</option>  
+            <option>For Repair</option>  
+            <option>Discontinued</option>  
+            <option>Other</option>  
+          </select>  
+        </label>  
+
+        <label id="statusAfterOtherWrap" class="hidden">  
+          Specify other status *  
+          <input id="statusAfterOther" maxlength="60" placeholder="Enter status after activity">  
+        </label>  
+      </div>  
+
+      <label>Description *  
+        <textarea id="maintenanceDescription" rows="3" required maxlength="1000" placeholder="Describe the inspection, issue, work performed, or parts replaced."></textarea>  
+      </label>  
+
+      <label>Remarks  
+        <textarea id="maintenanceRemarks" rows="2" maxlength="500" placeholder="Optional remarks"></textarea>  
+      </label>  
+
+      <div class="form-actions">  
+        <button type="submit" class="primary-btn">Save activity</button>  
+        <button type="button" id="clearMaintenanceForm" class="secondary-btn">Clear form</button>  
+      </div>  
+    </form>  
+
+    <div class="panel">  
+      <div class="toolbar">  
+        <input id="maintenanceSearch" class="search-input" type="search" placeholder="Search equipment, activity, description...">  
+
+        <select id="maintenanceTypeFilter">  
+          <option value="">All activity types</option>  
+          <option>Inspection</option>  
+          <option>Cleaning</option>  
+          <option>Preventive Maintenance</option>  
+          <option>Troubleshooting</option>  
+          <option>Repair</option>  
+          <option>Parts Replacement</option>  
+          <option>Other</option>  
+        </select>  
+      </div>  
+      <div id="maintenanceList" class="record-list"></div>  
+      <p id="maintenanceEmpty" class="empty-state hidden">No maintenance records found.</p>  
+    </div>  
+    
+    <!-- MAINTENANCE PAGINATION -->
+<div id="maintenancePagination" class="activity-pagination hidden">
+
+    <div id="maintenancePageInfo" class="activity-page-info"></div>
+
+    <div class="pagination-controls">
+
+        <button
+            type="button"
+            id="maintenancePrevGroup"
+            class="pagination-btn pagination-text-btn">
+            Previous
+        </button>
+
+        <button
+            type="button"
+            id="maintenancePrevPage"
+            class="pagination-btn pagination-arrow"
+            aria-label="Previous page">
+            &lt;
+        </button>
+
+        <div
+            id="maintenancePageNumbers"
+            class="pagination-numbers">
+        </div>
+
+        <button
+            type="button"
+            id="maintenanceNextPage"
+            class="pagination-btn pagination-arrow"
+            aria-label="Next page">
+            &gt;
+        </button>
+
+        <button
+            type="button"
+            id="maintenanceNextGroup"
+            class="pagination-btn pagination-text-btn">
+            Next
+        </button>
+
+    </div>
+
+</div>
+    
+  </section>
+
+<section id="view-archive" class="view">  
+  <div class="page-heading">  
+    <div>  
+      <p class="eyebrow">INACTIVE RECORDS</p>  
+      <h2>Archive records</h2>  
+      <p class="muted">  
+        Archived equipment and maintenance is hidden from  
+        the active asset register and service log.  
+      </p>  
+    </div>  
+  </div>    <div class="panel">  <!-- ARCHIVED EQUIPMENT RECORDS -->  
+<h3>Archived Equipment Records</h3>  
+
+<div class="toolbar">  
+  <input  
+    id="archiveSearch"  
+    class="search-input"  
+    type="search"  
+    placeholder="Search archived equipment record"  
+    aria-label="Search archived equipment records">  
+</div>  
+
+<div id="archiveList" class="record-list"></div>  
+
+<p id="archiveEmpty" class="empty-state hidden">  
+  No archived equipment records found.  
+</p>  
+
+<hr>  
+
+<!-- ARCHIVED MAINTENANCE RECORDS -->  
+<h3>Archived Maintenance Records</h3>  
+
+<div class="toolbar">  
+  <input  
+    id="archivedMaintenanceSearch"  
+    class="search-input"  
+    type="search"  
+    placeholder="Search archived maintenance record"  
+    aria-label="Search archived maintenance records">  
+</div>  
+
+<div  
+  id="archivedMaintenanceList"  
+  class="record-list">  
+</div>  
+
+<p id="archivedMaintenanceEmpty" class="empty-state hidden">  
+  No archived maintenance records found.  
+</p>
+
+  </div>  
+</section>  
+
+
+
+<!-- ==========================================
+     SYSTEM ACTIVITY LOG
+========================================== -->
+
+<section id="view-activity" class="view">
+
+    <div class="page-heading">
+        <div>
+            <p class="eyebrow">SYSTEM MONITORING</p>
+            <h2>System Activity Log</h2>
+            <p class="muted">
+                Monitor and review all recorded system activities.
+            </p>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <article class="stat-card">
+            <span>Total activities</span>
+            <strong id="activityTotal">0</strong>
+            <small>Recorded system activities</small>
+        </article>
+    </div>
+
+    <div class="panel">
+
+        <div class="panel-heading">
+            <div>
+                <h3>Activity History</h3>
+                <p class="muted">
+                    Latest activities appear first.
+                </p>
+            </div>
+        </div>
+
+        <!-- SEARCH AND FILTER TOOLBAR -->
+        <div class="activity-toolbar">
+
+            <input
+                id="activitySearch"
+                class="search-input"
+                type="search"
+                placeholder="Search activity, module, description..."
+                aria-label="Search system activities">
+
+            <div class="activity-filter-wrapper">
+
+                <button
+                    type="button"
+                    id="activityFilterBtn"
+                    class="activity-filter-btn"
+                    aria-expanded="false"
+                    aria-controls="activityFilterPanel">
+
+                    <span>☷</span>
+                    Filter
+
+                    <span
+                        id="activityFilterBadge"
+                        class="activity-filter-badge hidden">
+                        0
+                    </span>
+
+                </button>
+
+                <!-- FILTER PANEL -->
+                <div
+                    id="activityFilterPanel"
+                    class="activity-filter-panel hidden">
+
+                    <div class="activity-filter-header">
+                        <div>
+                            <h3>Filter Activity</h3>
+                            <p class="muted">
+                                Customize your activity history.
+                            </p>
+                        </div>
+
+                        <button
+                            type="button"
+                            id="closeActivityFilter"
+                            class="icon-btn"
+                            aria-label="Close filters">
+                            ✕
+                        </button>
+                    </div>
+
+                    <!-- MODULE FILTER -->
+                    <div class="activity-filter-group">
+
+                        <label for="activityModuleFilter">
+                            Module
+                        </label>
+
+                        <select id="activityModuleFilter">
+                            <option value="">All Modules</option>
+                            <option value="Equipment">Equipment</option>
+                            <option value="Maintenance">Maintenance</option>
+                        </select>
+
+                    </div>
+
+                    <!-- ACTIVITY TYPE FILTER -->
+                    <div class="activity-filter-group">
+
+                        <label for="activityTypeFilter">
+                            Activity Type
+                        </label>
+
+                        <select id="activityTypeFilter">
+                            <option value="">All Activities</option>
+                        </select>
+
+                    </div>
+
+                    <!-- DATE FILTER -->
+                    <div class="activity-filter-group">
+
+                        <label for="activityDateFilter">
+                            Date
+                        </label>
+
+                        <select id="activityDateFilter">
+
+                            <option value="">All Dates</option>
+                            <option value="today">Today</option>
+                            <option value="7days">Last 7 Days</option>
+                            <option value="30days">Last 30 Days</option>
+                            <option value="custom">Custom Date</option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- CUSTOM DATE RANGE -->
+                    <div
+                        id="activityCustomDate"
+                        class="activity-custom-date hidden">
+
+                        <div class="activity-filter-group">
+
+                            <label for="activityDateFrom">
+                                From
+                            </label>
+
+                            <input
+                                type="date"
+                                id="activityDateFrom">
+
+                        </div>
+
+                        <div class="activity-filter-group">
+
+                            <label for="activityDateTo">
+                                To
+                            </label>
+
+                            <input
+                                type="date"
+                                id="activityDateTo">
+
+                        </div>
+
+                    </div>
+
+                    <!-- SORT FILTER -->
+                    <div class="activity-filter-group">
+
+                        <label for="activitySortFilter">
+                            Sort By
+                        </label>
+
+                        <select id="activitySortFilter">
+
+                            <option value="newest">
+                                Newest First
+                            </option>
+
+                            <option value="oldest">
+                                Oldest First
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- FILTER ACTIONS -->
+                    <div class="activity-filter-actions">
+
+                        <button
+                            type="button"
+                            id="clearActivityFilters"
+                            class="secondary-btn">
+                            Clear All
+                        </button>
+
+                        <button
+                            type="button"
+                            id="applyActivityFilters"
+                            class="primary-btn">
+                            Apply Filters
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ACTIVITY RECORDS -->
+        <div
+            id="systemActivityList"
+            class="record-list">
+        </div>
+
+        <!-- PAGINATION -->
+        <div id="activityPagination" class="activity-pagination hidden">
+
+            <div
+                id="activityPageInfo"
+                class="activity-page-info"
+                aria-live="polite">
+                Showing 1–10 of 47 activities
+            </div>
+
+            <div class="pagination-controls">
+
+                <button
+                    type="button"
+                    id="activityPrevGroup"
+                    class="pagination-btn pagination-text-btn"
+                    disabled>
+                    Previous
+                </button>
+
+                <button
+                    type="button"
+                    id="activityPrevPage"
+                    class="pagination-btn pagination-arrow"
+                    aria-label="Previous page"
+                    disabled>
+                    &lt;
+                </button>
+
+                <div
+                    id="activityPageNumbers"
+                    class="pagination-numbers"
+                    aria-label="Activity log pages">
+                </div>
+
+                <button
+                    type="button"
+                    id="activityNextPage"
+                    class="pagination-btn pagination-arrow">
+                    &gt;
+                </button>
+
+                <button
+                    type="button"
+                    id="activityNextGroup"
+                    class="pagination-btn pagination-text-btn">
+                    Next
+                </button>
+
+            </div>
+
+        </div>
+
+        <p
+            id="activityEmpty"
+            class="empty-state hidden">
+            No system activities recorded yet.
+        </p>
+
+    </div>
+
+</section>
+
+
+</main>
+
+  </div>    <!-- ==========================================  
+     CONFIRMATION MODAL  
+========================================== -->  <div id="confirmationModal" class="confirmation-overlay hidden"  
+     role="dialog"  
+     aria-modal="true"  
+     aria-labelledby="confirmationTitle">    <div class="confirmation-box">  <div class="confirmation-icon">?</div>  
+
+<h3 id="confirmationTitle">Confirm Action</h3>  
+
+<p id="confirmationMessage">  
+  Are you sure you want to continue?  
+</p>  
+
+<div class="confirmation-actions">  
+
+  <button type="button"  
+          id="cancelConfirmation"  
+          class="secondary-btn">  
+    Cancel  
+  </button>  
+
+  <button type="button"  
+          id="confirmAction"  
+          class="primary-btn">  
+    Confirm  
+  </button>  
+
+</div>
+
+  </div>  </div>  <!-- ==========================================  
+     EQUIPMENT HISTORY MODAL  
+========================================== -->  <div id="equipmentHistoryModal"  
+     class="confirmation-overlay hidden"  
+     role="dialog"  
+     aria-modal="true"  
+     aria-labelledby="equipmentHistoryTitle">    <div class="confirmation-box equipment-history-box">  <div class="panel-heading">  
+  <div>  
+    <p class="eyebrow">EQUIPMENT RECORD</p>  
+    <h3 id="equipmentHistoryTitle">Equipment History</h3>  
+  </div>  
+
+  <button type="button"  
+          id="closeEquipmentHistory"  
+          class="icon-btn"  
+          aria-label="Close history">  
+    ✕  
+  </button>  
+</div>  
+
+<div id="equipmentHistoryContent">  
+  <!-- Populated by JavaScript -->  
+</div>  
+
+<div class="confirmation-actions">  
+  <button type="button"  
+          id="closeEquipmentHistoryButton"  
+          class="primary-btn">  
+    Close  
+  </button>  
+</div>
+
+  </div>  
+</div>  <!-- ==========================================  
+     MAINTENANCE HISTORY MODAL  
+========================================== -->  <div id="maintenanceHistoryModal"  
+     class="confirmation-overlay hidden"  
+     role="dialog"  
+     aria-modal="true"  
+     aria-labelledby="maintenanceHistoryTitle">    <div class="confirmation-box equipment-history-box">  <div class="panel-heading">  
+  <div>  
+    <p class="eyebrow">MAINTENANCE RECORD</p>  
+    <h3 id="maintenanceHistoryTitle">Maintenance History</h3>  
+  </div>  
+
+  <button type="button"  
+          id="closeMaintenanceHistory"  
+          class="icon-btn"  
+          aria-label="Close history">  
+    ✕  
+  </button>  
+</div>  
+
+<div id="maintenanceHistoryContent">  
+  <!-- Populated by JavaScript -->  
+</div>  
+
+<div class="confirmation-actions">  
+  <button type="button"  
+          id="closeMaintenanceHistoryButton"  
+          class="primary-btn">  
+    Close  
+  </button>  
+</div>
+
+  </div>  
+</div>    
+<div id="toast" class="toast" role="status" aria-live="polite"></div>  
+
+<footer class="emrs-footer">  
+    <div class="footer-content">  
+        <div class="footer-brand">  
+            <h3>🔧 Equipment Maintenance Records System</h3>  
+        </div>  
+    </div>  
+    <div class="footer-bottom">  
+    <p>  
+        &copy; <span id="footerYear"></span> 
+        EMRS. All Rights Reserved.  
+    </p>  
+</div>
+
+</footer>  
+<script>  
+    document.getElementById("footerYear").textContent =  
+        new Date().getFullYear();  
+</script>    
+
+<script src="script.js"></script>  
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(registration => {
+        console.log("EMRS Service Worker registered:",
+                    registration.scope);
+      })
+      .catch(error => {
+        console.error("Service Worker registration failed:", error);
+      });
+  });
+}
+</script>
+
+</body>  
+
+</html>
